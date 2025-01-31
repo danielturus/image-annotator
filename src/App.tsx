@@ -59,17 +59,20 @@ function App() {
   }, [handlePaste]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="h-screen flex flex-col bg-gray-100 p-2">
+      <div className="flex flex-col flex-grow min-h-0">
+        <div className="flex flex-col flex-grow min-h-0 bg-white rounded-lg shadow-lg p-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-6">Image Annotator</h1>
 
           {!image ? (
-            <div className="flex flex-col justify-center items-center border-2 border-dashed border-gray-300 rounded-lg p-12 text-center h-72">
+            <div className="flex flex-col flex-grow min-h-0 justify-center items-center border-2 border-dashed border-gray-300 rounded-lg p-12">
               <p className="text-gray-500">Paste an image (Ctrl+V / Cmd+V) to start annotating</p>
             </div>
           ) : (
-            <div ref={canvasContainerRef} className="border border-gray-200 rounded-lg overflow-auto relative">
+            <div
+              ref={canvasContainerRef}
+              className="flex flex-col flex-grow min-h-0 overflow-auto border border-gray-200 rounded-lg relative"
+            >
               <Canvas image={image} mode={mode} onSave={handleSave} />
             </div>
           )}
