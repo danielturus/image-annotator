@@ -62,36 +62,14 @@ function App() {
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-lg shadow-lg p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">Image Annotator</h1>
-            <div className="flex gap-2">
-              <button
-                className={`p-2 rounded-lg ${
-                  mode === "draw" ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-                onClick={() => setMode("draw")}
-                title="Draw (D)"
-              >
-                <Pencil className="w-5 h-5" />
-              </button>
-              <button
-                className={`p-2 rounded-lg ${
-                  mode === "arrow" ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-                onClick={() => setMode("arrow")}
-                title="Arrow (A)"
-              >
-                <ArrowUpRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+          <h1 className="text-2xl font-bold text-gray-800 mb-6">Image Annotator</h1>
 
           {!image ? (
-            <div className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-12 text-center min-h-72">
+            <div className="flex flex-col justify-center items-center border-2 border-dashed border-gray-300 rounded-lg p-12 text-center h-72">
               <p className="text-gray-500">Paste an image (Ctrl+V / Cmd+V) to start annotating</p>
             </div>
           ) : (
-            <div ref={canvasContainerRef} className="border border-gray-200 rounded-lg overflow-auto">
+            <div ref={canvasContainerRef} className="border border-gray-200 rounded-lg overflow-auto relative">
               <Canvas image={image} mode={mode} onSave={handleSave} />
             </div>
           )}
@@ -102,6 +80,28 @@ function App() {
             <p>Press Cmd+Shift+Z / Ctrl+Shift+Z to redo</p>
           </div>
         </div>
+      </div>
+
+      {/* Fixed toolbar at the bottom center */}
+      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 bg-white rounded-full shadow-lg p-2 z-50">
+        <button
+          className={`p-3 rounded-full transition-colors ${
+            mode === "draw" ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+          onClick={() => setMode("draw")}
+          title="Draw (D)"
+        >
+          <Pencil className="w-5 h-5" />
+        </button>
+        <button
+          className={`p-3 rounded-full transition-colors ${
+            mode === "arrow" ? "bg-blue-100 text-blue-600" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+          }`}
+          onClick={() => setMode("arrow")}
+          title="Arrow (A)"
+        >
+          <ArrowUpRight className="w-5 h-5" />
+        </button>
       </div>
     </div>
   );
